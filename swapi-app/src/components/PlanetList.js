@@ -4,9 +4,10 @@ export function PlanetList() {
     const [planets, setPlanets] = useState([]);
     const [loading, setLoading] = useState(true);
 
-
+    // Paste the API link here to test different pages.
     const API_URL = "https://swapi.dev/api/planets/";
 
+    // API call
       const getPlanets = async () => {
         try {
           const res = await fetch(API_URL);
@@ -21,6 +22,7 @@ export function PlanetList() {
         }
       };
 
+    // Checks for data listed as "uknown" in all fields except for water surface area.
       const unknownCheck = (data) => {
           if (data === "unknown") {
               return "?"
@@ -29,27 +31,19 @@ export function PlanetList() {
           return data;
       }
 
+    // Logic for getting surface area of planet and amount covered by water.
       const getSurfaceArea = (diameter) => {
         let radius = diameter / 2;
         let surfaceArea = 4 * Math.PI * Math.pow(radius, 2);
         return surfaceArea;
       }
 
-      
       const getWaterSurfaceArea = (diameter, surfaceWater) => {
-        console.log(diameter);
-        console.log(surfaceWater);
-
         let surfaceArea = getSurfaceArea(diameter);
         let surfaceWaterPercent = surfaceWater / 100;
-
-        console.log(surfaceArea);
-        console.log(surfaceWaterPercent);
-
         let waterSurfaceArea = Math.round(surfaceArea * surfaceWaterPercent);
 
-        console.log(waterSurfaceArea);
-
+        // Renders a question mark if unknown.
         if (isNaN(waterSurfaceArea)) {
             return "?";
         } else {
@@ -63,7 +57,6 @@ export function PlanetList() {
 
     return (
         <div>
-            <p>The planets component!</p>
             {loading ? 
                 <div>
                     <p>Loading...</p>
@@ -87,7 +80,7 @@ export function PlanetList() {
                         <tbody>
                             {planets.results.map((planet) => 
                             <tr key={planet.name}>
-                                <th scope="row">{unknownCheck(planet.name)}</th>
+                                <th scope="row"><a href={planet.url}>{unknownCheck(planet.name)}</a></th>
                                 <td>{unknownCheck(planet.climate)}</td>
                                 <td>{unknownCheck(planet.residents).length}</td>
                                 <td>{unknownCheck(planet.terrain)}</td>
