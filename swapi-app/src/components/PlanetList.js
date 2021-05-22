@@ -90,7 +90,7 @@ export function PlanetList() {
                             </tr>
                         </thead>
                         <tbody>
-                            {planets.results.map((planet) => 
+                            {planets.map((planet) => 
                             <tr key={planet.name}>
                                 <th scope="row"><a href={planet.url}>{unknownCheck(planet.name)}</a></th>
                                 <td>{unknownCheck(planet.climate)}</td>
