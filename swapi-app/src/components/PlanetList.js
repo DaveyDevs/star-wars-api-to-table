@@ -21,6 +21,14 @@ export function PlanetList() {
         }
       };
 
+      const unknownCheck = (data) => {
+          if (data === "unknown") {
+              return "?"
+          }
+
+          return data;
+      }
+
       const getSurfaceArea = (diameter) => {
         let radius = diameter / 2;
         let surfaceArea = 4 * Math.PI * Math.pow(radius, 2);
@@ -79,13 +87,12 @@ export function PlanetList() {
                         <tbody>
                             {planets.results.map((planet) => 
                             <tr key={planet.name}>
-                                <th scope="row">{planet.name}</th>
-                                <td>{planet.climate}</td>
-                                <td>{planet.residents.length}</td>
-                                <td>{planet.terrain}</td>
-                                <td>{planet.population}</td>
+                                <th scope="row">{unknownCheck(planet.name)}</th>
+                                <td>{unknownCheck(planet.climate)}</td>
+                                <td>{unknownCheck(planet.residents).length}</td>
+                                <td>{unknownCheck(planet.terrain)}</td>
+                                <td>{unknownCheck(planet.population)}</td>
                                 <td>{getWaterSurfaceArea(planet.diameter, planet.surface_water)}</td>
-                                {/* <td>{Math.round(getSurfaceArea(planet.diameter) * parseFloat(planet.surface_water) / 100.0)}</td> */}
                             </tr>
                             )}
                         </tbody>
