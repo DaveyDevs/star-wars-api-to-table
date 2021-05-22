@@ -21,14 +21,6 @@ export function PlanetList() {
         }
       };
     
-      // App.js continued
-    //   const userSettings = {
-    //     dogs: dogs,
-    //     loading: loading,
-    //     setDogs,
-    //     setLoading,
-    //   };
-    
       useEffect(() => {
         getPlanets();
       }, []);
@@ -43,7 +35,27 @@ export function PlanetList() {
                 :
                 <p>Planets!</p>
             }
-            {/* {planets && <div>{planets}</div>} */}
+            {planets && 
+                <table>
+                    <caption>Star Wars Planets List</caption>
+                    <thead>
+                        <tr>
+                        <th scope="col">Planet</th>
+                        <th scope="col">next</th>
+                        <th scope="col">next</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {planets.results.map((planet) => 
+                        <tr>
+                            <th scope="row">{planet.name}</th>
+                            <td>{planet.name}</td>
+                            <td>{planet.climate}</td>
+                        </tr>
+                        )}
+                    </tbody>
+                </table>
+            }
         </div>
     )
 }
