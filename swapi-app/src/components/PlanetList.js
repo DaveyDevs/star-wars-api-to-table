@@ -35,7 +35,6 @@ export function PlanetList() {
     // Spacing large numbers into threes
      const spaceNumber = (number) => {
       let spaced = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-      // console.log(spaced);
       return spaced;
      }
 
@@ -63,7 +62,6 @@ export function PlanetList() {
         if (isNaN(waterSurfaceArea)) {
             return "?";
         } else {
-          console.log(waterSurfaceArea);
             return waterSurfaceArea;
         }
       }
