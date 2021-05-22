@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from 'react'
 
 export function PlanetList() {
-    const [planets, setPlanets] = useState([]);
+    const [planets, setPlanets] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     // Paste the API link here to test different pages.
     const API_URL = "https://swapi.dev/api/planets/";
 
-    // API call
+    // Uncomment and use this link to produce URL error:
+    // const API_URL = "https://swapi.dev/api/planetss/";
+
+
+    // API call and error handling
       const getPlanets = async () => {
         try {
           const res = await fetch(API_URL);
+          if(!res.ok) {
+              throw Error("Not able to access planets.")
+          }
           const planetResults = await res.json();
-          setPlanets(planetResults);
-          setLoading(false);
 
-          console.log(planetResults);
-          console.log(planets);
+          let planetsAlphabetical = planetResults.results.sort((a,b) => a.name > b.name ? 1 : -1);
+
+          setLoading(false);
+          setPlanets(planetsAlphabetical);
+          setError(null);
         } catch (e) {
-          console.error(e);
+          setLoading(false);
+          setError(`Error: ${e.message}`);
         }
       };
 
@@ -27,7 +37,6 @@ export function PlanetList() {
           if (data === "unknown") {
               return "?"
           }
-
           return data;
       }
 
@@ -57,13 +66,16 @@ export function PlanetList() {
 
     return (
         <div>
-            {loading ? 
+            {error && 
+                <div>
+                    <p>{error}</p>
+                </div>}
+            {loading && 
                 <div>
                     <p>Loading...</p>
-                </div>
-                :
+                </div>}
+            {!error && planets && 
                 <div>
-                {planets && 
                     <table>
                         <caption>Star Wars Planets List</caption>
                         <thead>
@@ -74,7 +86,7 @@ export function PlanetList() {
                             <th scope="col">Terrains</th>
                             <th scope="col">Population</th>
                             <th scope="col">Surface area covered by water (km<sup>2</sup>)</th>
-    
+
                             </tr>
                         </thead>
                         <tbody>
@@ -90,9 +102,8 @@ export function PlanetList() {
                             )}
                         </tbody>
                     </table>
-                }
                 </div>
-            }
+            } 
         </div>
     )
 }
