@@ -32,6 +32,13 @@ export function PlanetList() {
         }
       };
 
+    // Spacing large numbers into threes
+     const spaceNumber = (number) => {
+      let spaced = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      // console.log(spaced);
+      return spaced;
+     }
+
     // Checks for data listed as "uknown" in all fields except for water surface area.
       const unknownCheck = (data) => {
           if (data === "unknown") {
@@ -56,6 +63,7 @@ export function PlanetList() {
         if (isNaN(waterSurfaceArea)) {
             return "?";
         } else {
+          console.log(waterSurfaceArea);
             return waterSurfaceArea;
         }
       }
@@ -96,8 +104,8 @@ export function PlanetList() {
                                 <td>{unknownCheck(planet.climate)}</td>
                                 <td>{unknownCheck(planet.residents).length}</td>
                                 <td>{unknownCheck(planet.terrain)}</td>
-                                <td>{unknownCheck(planet.population)}</td>
-                                <td>{getWaterSurfaceArea(planet.diameter, planet.surface_water)}</td>
+                                <td>{spaceNumber(unknownCheck(planet.population))}</td>
+                                <td>{spaceNumber(getWaterSurfaceArea(planet.diameter, planet.surface_water))}</td>
                             </tr>
                             )}
                         </tbody>
