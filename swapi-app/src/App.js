@@ -1,4 +1,5 @@
-import './App.css';
+import './css/normalize.css';
+import './css/App.css';
 
 import { PlanetList } from "./components/PlanetList"
 
