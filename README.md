@@ -66,7 +66,7 @@ With more time to work on this project, I would like to:
 - Related to above, import the PropTypes tool to check and ensure that the data types coming from the API are correct.
 - Create a timeout in the fetch request in case it takes too long to complete.
 - Review and update HTML to make more semantic, as needed.
-- Make the table both responsive and check accessibility as that's done. This article seems like an interesting dive into possible solutions: https://www.smashingmagazine.com/2019/01/table-design-patterns-web/
+- Make the table responsive and check accessibility as that's done. This article seems like an interesting dive into possible solutions: https://www.smashingmagazine.com/2019/01/table-design-patterns-web/
 - Research Axios as a solution for fetch requests, as it is more compatible with older browsers. I would want to look at other tools, such as polyfills, to ensure React works as well. I understand that government agencies and similar clients may still use older browsers for their applications.
 - Look at how to possibly refactor some of the function calls to check for "unknown" or split large numbers.
 - Find a solution for screen readers to be able to read large numbers without commas.
